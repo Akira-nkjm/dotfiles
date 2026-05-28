@@ -1,0 +1,39 @@
+# Shared git config — symlinked to ~/.gitconfig by bootstrap.sh
+#
+# マシン固有設定 (user.name / user.email / 認証ヘルパ等) は ~/.gitconfig.local に置き、
+# 下の [include] で読み込む。bootstrap.sh が初回に既存 ~/.gitconfig を .local に退避する。
+
+[include]
+	path = ~/.gitconfig.local
+
+[core]
+	pager = delta
+	editor = vim
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = base16
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	colorMoved = default
+	algorithm = histogram
+
+[pull]
+	rebase = true
+
+[init]
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
+
+[rerere]
+	enabled = true

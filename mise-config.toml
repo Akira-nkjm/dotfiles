@@ -1,0 +1,42 @@
+# Global mise config — symlinked to ~/.config/mise/config.toml
+#
+# Per-project mise.toml overrides values here.
+#
+# 方針: mise で書けるものは全部ここに集約する。
+# 例外として uv / rustup は別レイヤーで管理する:
+#   - Python interpreter は uv (uv python pin) または プロジェクトの mise.toml
+#   - Rust toolchain は rustup + rust-toolchain.toml
+# 理由: 各々の self-update が速く、bootstrap が壊れた時の復旧経路を短く保つため。
+#
+# apt 側に残すのは「システム基盤 / シェル統合ファイルが /usr/share に必要なもの /
+# mise を入れる前提のもの」のみ (zsh, fzf integration, curl, git, build-essential 等)。
+
+[tools]
+# 言語ランタイム
+node = "lts"
+
+# Node 系パッケージマネージャ
+# プロジェクト固有バージョンは ./mise.toml で上書き。corepack enable はしない。
+pnpm = "latest"
+
+# ターミナル UX
+starship = "latest"
+tmux     = "latest"
+
+# CLI ツール（apt より追随が速い）
+gh      = "latest"
+ripgrep = "latest"
+fd      = "latest"
+bat     = "latest"
+jq      = "latest"
+
+# 開発ワークフロー
+just    = "latest"   # タスクランナー (justfile)
+eza     = "latest"   # ls + tree 置き換え (zshrc にエイリアス)
+zoxide  = "latest"   # 賢い cd (zshrc で eval `zoxide init zsh`)
+delta   = "latest"   # git diff pager (gitconfig で設定)
+lazygit = "latest"   # git TUI
+yq      = "latest"   # YAML/TOML の jq
+
+# 注: AI CLI (claude / codex) は公式 install script が推奨かつ自己更新するため
+# mise ではなく bootstrap.sh で直接導入 (uv / rustup と同じ扱い)。
