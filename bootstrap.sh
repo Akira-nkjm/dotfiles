@@ -71,6 +71,21 @@ if ! command -v codex >/dev/null 2>&1; then
   curl -fsSL https://chatgpt.com/codex/install.sh | sh
 fi
 
+# VSCode CLI standalone (zshrc の remote-tunnel 関数が使う ~/.local/bin/code-tunnel)
+# 注: VSCode Remote 拡張が PATH に注入する `code` は tunnel サブコマンドを持たないため、
+# 別名 code-tunnel として standalone CLI を入れる。
+if [ ! -x "$HOME/.local/bin/code-tunnel" ]; then
+  log "Installing VSCode CLI standalone (~/.local/bin/code-tunnel)"
+  mkdir -p "$HOME/.local/bin"
+  tmp=$(mktemp -d)
+  curl -fsSL "https://update.code.visualstudio.com/latest/cli-linux-x64/stable" \
+    -o "$tmp/code-cli.tar.gz"
+  tar -xzf "$tmp/code-cli.tar.gz" -C "$tmp"
+  mv "$tmp/code" "$HOME/.local/bin/code-tunnel"
+  chmod +x "$HOME/.local/bin/code-tunnel"
+  rm -rf "$tmp"
+fi
+
 # -------------------------
 # 5. mise (language / CLI tool manager)
 # -------------------------
@@ -99,6 +114,10 @@ backup() {
 
 backup "$HOME/.zshrc"
 ln -sfn "$DOTFILES/zshrc" "$HOME/.zshrc"
+
+# ~/.zshrc.local: マシン固有の個人設定 (gh アカウント切替, SSH 鍵 path 等) を入れる空ファイル。
+# dotfiles/zshrc の末尾で source される。git 管理外。
+[ -f "$HOME/.zshrc.local" ] || touch "$HOME/.zshrc.local"
 
 backup "$HOME/.config/starship.toml"
 ln -sfn "$DOTFILES/starship.toml" "$HOME/.config/starship.toml"

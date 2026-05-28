@@ -16,7 +16,7 @@ exec zsh
 |---|---|---|
 | `bootstrap.sh` | エントリポイント。apt → rustup → uv → claude/codex → mise → symlink → chsh の順 | (実行のみ) |
 | `mise-config.toml` | mise の宣言設定 (言語ランタイム + CLI ツール) | `~/.config/mise/config.toml` |
-| `zshrc` | シェル設定 (history / completion / aliases / プラグイン source / mise+zoxide+starship 統合) | `~/.zshrc` |
+| `zshrc` | シェル設定 (history / completion / aliases / 関数 / mise+zoxide+starship 統合)。末尾で `~/.zshrc.local` を source | `~/.zshrc` |
 | `starship.toml` | プロンプト設定 | `~/.config/starship.toml` |
 | `gitconfig` | 共有 git 設定 (delta / merge / rebase 等)。マシン固有情報は `~/.gitconfig.local` に分離 | `~/.gitconfig` |
 
