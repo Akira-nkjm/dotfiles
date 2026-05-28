@@ -130,6 +130,26 @@ remote-tunnel() {
 }
 
 # -------------------------
+# `code` を remote-cli 側に固定 (Remote-WSL / SSH / Tunnel セッション中のみ)
+# -------------------------
+# Remote セッション中は /mnt/c/.../Microsoft VS Code/bin/code が PATH 先頭に
+# 居座り、`code .` が手元の VSCode ウィンドウではなく WSL ホスト上の Code.exe を
+# 起動してしまう。VSCODE_IPC_HOOK_CLI が立っているとき = リモートセッション中なので、
+# その時だけ VSCode が自動設置した remote-cli を PATH 先頭に挿し直す。
+if [ -n "$VSCODE_IPC_HOOK_CLI" ]; then
+  for _cli_dir in \
+    "$HOME"/.vscode-server/bin/*/bin/remote-cli(N) \
+    "$HOME"/.vscode/cli/servers/*/server/bin/remote-cli(N)
+  do
+    if [ -x "$_cli_dir/code" ]; then
+      export PATH="$_cli_dir:$PATH"
+      break
+    fi
+  done
+  unset _cli_dir
+fi
+
+# -------------------------
 # Machine-local overrides (個人アカウント設定など)
 # -------------------------
 # ~/.zshrc.local は git 管理外。bootstrap.sh が空ファイルを用意するので
