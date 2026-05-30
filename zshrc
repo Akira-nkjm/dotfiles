@@ -121,6 +121,13 @@ remote-tunnel() {
     return 1
   fi
 
+  # systemd サービス (`code-tunnel tunnel service install`) で常駐済みなら二重起動しない。
+  # 既にトンネルが Connected ならここで打ち切る (過去に手動起動と重複して不調になった)。
+  if "$HOME/.local/bin/code-tunnel" tunnel status 2>/dev/null | grep -q '"Connected"'; then
+    echo "tunnel は既に起動済み (systemd service もしくは別セッション)。何もしない。" >&2
+    return 0
+  fi
+
   if ! tmux has-session -t "$SESSION" 2>/dev/null; then
     tmux new-session -d -s "$SESSION" "$CMD"
     echo "tunnel session started."
