@@ -136,6 +136,19 @@ remote-tunnel() {
   fi
 }
 
+# tunnel を systemd ユーザーサービスとして常駐登録する (初回一度だけ手動で実行)。
+# install は冪等 (再実行で re-install)。初回は GitHub/Microsoft のデバイスコード認証あり。
+# linger を有効化して WSL 起動と同時 (ログインセッション無しでも) 立ち上がるようにする。
+remote-tunnel-install() {
+  if [ ! -x "$HOME/.local/bin/code-tunnel" ]; then
+    echo "code-tunnel が無い。bootstrap.sh を再実行するか、手動でインストールしてください。" >&2
+    return 1
+  fi
+  "$HOME/.local/bin/code-tunnel" tunnel service install --accept-server-license-terms || return 1
+  sudo loginctl enable-linger "$USER"
+  echo "登録完了。状態: 'code-tunnel tunnel status' / 'systemctl --user status code-tunnel.service'"
+}
+
 # -------------------------
 # `code` を remote-cli 側に固定 (Remote-WSL / SSH / Tunnel セッション中のみ)
 # -------------------------
