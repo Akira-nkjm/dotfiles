@@ -157,6 +157,11 @@ if [ -n "$VSCODE_IPC_HOOK_CLI" ]; then
 fi
 
 # -------------------------
+# WSL2 で Windows 側の DLL を PATH に追加 (WSL2 固有の問題回避)
+# -------------------------
+export PATH="$PATH:/usr/lib/wsl/lib"
+
+# -------------------------
 # Machine-local overrides (個人アカウント設定など)
 # -------------------------
 # ~/.zshrc.local は git 管理外。bootstrap.sh が空ファイルを用意するので
