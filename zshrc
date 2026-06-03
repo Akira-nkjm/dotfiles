@@ -19,6 +19,9 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 [[ -n "$LS_COLORS" ]] && zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
+# just のレシピ名を動的補完（アクティブな justfile / import 先から取得）
+command -v just >/dev/null && source <(just --completions zsh)
+
 # -------------------------
 # Key bindings
 # -------------------------
@@ -105,6 +108,13 @@ mkcd() {
 mkcode() {
   mkcd "$1" && code .
 }
+
+
+#-------------------------
+# GitHub CLI token export (gh auth token の出力を環境変数に)
+#-------------------------
+
+export GITHUB_PERSONAL_ACCESS_TOKEN=$(gh auth token)
 
 # -------------------------
 # VSCode Remote Tunnel (tmux 常駐)
