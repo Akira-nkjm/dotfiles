@@ -14,6 +14,7 @@
 [tools]
 # 言語ランタイム
 node = "lts"
+go   = "latest"
 
 # Node 系パッケージマネージャ
 # プロジェクト固有バージョンは ./mise.toml で上書き。corepack enable はしない。
@@ -37,6 +38,7 @@ zoxide  = "latest"   # 賢い cd (zshrc で eval `zoxide init zsh`)
 delta   = "latest"   # git diff pager (gitconfig で設定)
 lazygit = "latest"   # git TUI
 yq      = "latest"   # YAML/TOML の jq
+typst = "latest"
 
 # 注: AI CLI (claude / codex) は公式 install script が推奨かつ自己更新するため
 # mise ではなく bootstrap.sh で直接導入 (uv / rustup と同じ扱い)。
