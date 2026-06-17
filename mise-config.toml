@@ -40,5 +40,9 @@ lazygit = "latest"   # git TUI
 yq      = "latest"   # YAML/TOML の jq
 typst = "latest"
 
+# Infrastructure as Code / AWS（LocalStack 練習 + 本物の AWS でも使い回す）
+terraform = "latest"
+aws-cli   = "latest"
+
 # 注: AI CLI (claude / codex) は公式 install script が推奨かつ自己更新するため
 # mise ではなく bootstrap.sh で直接導入 (uv / rustup と同じ扱い)。

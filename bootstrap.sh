@@ -149,7 +149,37 @@ if [ -x "$HOME/.local/bin/mise" ]; then
 fi
 
 # -------------------------
-# 8. default shell -> zsh
+# 8. Docker Engine (LocalStack 等のコンテナ基盤)
+# -------------------------
+# 方針: mise はデーモン(dockerd)を管理できないため Docker は独立レイヤー。
+# Docker 公式 apt リポジトリを使う(Ubuntu 同梱版より追随が速く公式推奨)。
+# WSL2 は systemd=true (/etc/wsl.conf) なので systemctl で自動起動できる。
+if ! command -v docker >/dev/null 2>&1; then
+  log "Installing Docker Engine (official apt repo)"
+  sudo install -m 0755 -d /etc/apt/keyrings
+  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+    -o /etc/apt/keyrings/docker.asc
+  sudo chmod a+r /etc/apt/keyrings/docker.asc
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+    | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+  sudo apt update
+  sudo apt install -y docker-ce docker-ce-cli containerd.io \
+    docker-buildx-plugin docker-compose-plugin
+fi
+# sudo なしで docker を使う: docker グループに追加(反映は再ログイン後)
+if ! id -nG "$USER" | grep -qw docker; then
+  log "Adding $USER to docker group (re-login required to take effect)"
+  sudo usermod -aG docker "$USER"
+fi
+# systemd 有効なら起動 + 自動起動を有効化
+if [ -d /run/systemd/system ]; then
+  sudo systemctl enable --now docker
+fi
+
+# -------------------------
+# 9. default shell -> zsh
 # -------------------------
 zsh_path="$(command -v zsh)"
 current_shell="$(getent passwd "$USER" | cut -d: -f7)"
