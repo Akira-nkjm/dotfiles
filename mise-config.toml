@@ -44,5 +44,17 @@ typst = "latest"
 terraform = "latest"
 aws-cli   = "latest"
 
+# Google Cloud SDK（gcloud / gsutil / bq。専用 python3 同梱なのでシステム Python 非依存）
+# 自己更新 (gcloud components update) は version manager 下では無効だが、mise の宣言的
+# バージョン管理 (この行を書き換え) で代替できるので aws-cli / terraform と同じ扱いにできる。
+# gws auth setup の依存 (OAuth client / GCP project 設定) でもある。
+gcloud = "latest"
+
+# Google Workspace CLI（Drive / Gmail / Calendar / Sheets / Docs などを 1 コマンドで）
+# mise registry 未登録のため github バックエンドで直接 prebuilt binary を取得 (バイナリ名は gws)。
+# 認証情報は ~/.config/gws/ に暗号化保存される機密情報なので repo では管理しない (gh / claude と同様)。
+# 初回は `gws auth setup` → `gws auth login` を手動実行する (README の手動ステップ参照。gcloud 必須)。
+"github:googleworkspace/cli" = "latest"
+
 # 注: AI CLI (claude / codex) は公式 install script が推奨かつ自己更新するため
 # mise ではなく bootstrap.sh で直接導入 (uv / rustup と同じ扱い)。

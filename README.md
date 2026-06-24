@@ -30,7 +30,7 @@ exec zsh
 | **rustup** | Rust toolchain | rustup の self-update が速い。プロジェクト pin は `rust-toolchain.toml` |
 | **uv** | Python interpreter + packages | uv の `python pin` が速く、mise を挟むと役割が重複する |
 | **claude / codex** | `~/.local/bin/{claude,codex}` (公式 install script) | Anthropic / OpenAI の native installer が公式推奨。Claude は自己更新 |
-| **mise** | 他全部: node / pnpm / starship / tmux / gh / ripgrep / fd / bat / jq / just / eza / zoxide / delta / lazygit / yq / terraform / aws-cli | 一元管理、apt より追随が速い、per-project 切替 (`./mise.toml`) が効く |
+| **mise** | 他全部: node / pnpm / starship / tmux / gh / ripgrep / fd / bat / jq / just / eza / zoxide / delta / lazygit / yq / typst / terraform / aws-cli / gcloud (Google Cloud SDK) / gws (Google Workspace CLI) | 一元管理、apt より追随が速い、per-project 切替 (`./mise.toml`) が効く |
 | **docker** | Docker Engine (docker-ce / compose-plugin)。公式 apt リポジトリ | デーモン(dockerd)は mise で管理できない。WSL2 は systemd=true なので systemctl で自動起動 |
 
 ## bootstrap 後の手動ステップ
@@ -41,6 +41,8 @@ exec zsh
 | Claude Code ログイン | `claude` (初回起動でブラウザ認証) |
 | OpenAI Codex ログイン | `codex` (初回起動で OpenAI 認証) |
 | GitHub CLI ログイン | `gh auth login` |
+| Google Cloud SDK ログイン | `gcloud auth login` (gws auth setup が gcloud を呼ぶ前提)。設定は `~/.config/gcloud/` に保存され repo 管理外 |
+| Google Workspace CLI ログイン | `gws auth setup` (GCP プロジェクト/OAuth 設定、gcloud 必須) → `gws auth login` (OAuth 同意)。認証情報は `~/.config/gws/` に暗号化保存され repo 管理外 |
 | Windows 側 | VSCode + WSL 拡張は別途手動 (この repo の範囲外) |
 
 ## 設計方針
