@@ -55,6 +55,12 @@ gcloud = "latest"
 # 認証情報は ~/.config/gws/ に暗号化保存される機密情報なので repo では管理しない (gh / claude と同様)。
 # 初回は `gws auth setup` → `gws auth login` を手動実行する (README の手動ステップ参照。gcloud 必須)。
 "github:googleworkspace/cli" = "latest"
+k3d = "latest"
+kubectl = "latest"
+helm = "latest"
+k9s = "latest"
+"aqua:EmbarkStudios/cargo-deny" = "latest"
+ollama = "latest"
 
 # 注: AI CLI (claude / codex) は公式 install script が推奨かつ自己更新するため
 # mise ではなく bootstrap.sh で直接導入 (uv / rustup と同じ扱い)。
