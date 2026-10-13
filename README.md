@@ -28,7 +28,7 @@ exec zsh
 | mise | node, pnpm, go, gh, ripgrep, eza, zoxide, starship, tmux, kubectl, helm, age, sops, ... | One declaration for every OS; per-project versions |
 | uv / rustup | Python / Rust toolchains | Fast official self-updaters |
 | claude / codex | Official installers into `~/.local/bin` | Recommended upstream; they self-update |
-| Homebrew (mac) | zsh plugins, fzf, git, rsync, syncthing, fonts, GUI apps | Shell integration files and apps mise doesn't handle |
+| Homebrew (mac) | zsh plugins, fzf, git, rsync, fonts, GUI apps (Syncthing, Nextcloud) | Shell integration files and apps mise doesn't handle |
 | apt (Linux) | zsh, zsh plugins, fzf, build tools | Same, on Linux |
 | Docker (Linux) | Docker Engine from the official apt repo | Daemon; on macOS install Docker Desktop / OrbStack manually |
 

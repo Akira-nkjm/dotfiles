@@ -10,7 +10,6 @@ brew "fzf"            # `fzf --zsh` でキーバインドを読み込む
 # --- システム寄りのツール ---
 brew "git"            # Apple 同梱の git より新しいもの
 brew "rsync"          # macOS 同梱は古い。フルディスクアクセスをこの rsync に付けて使う場合あり
-brew "syncthing"      # 常駐させるなら `brew services start syncthing`
 brew "poppler"        # pdftotext など (ライブラリ + CLI)
 brew "xcbeautify"     # Xcode のビルドログ整形
 
@@ -18,3 +17,7 @@ brew "xcbeautify"     # Xcode のビルドログ整形
 cask "font-noto-sans-cjk-jp"
 cask "font-noto-serif-cjk-jp"
 cask "nextcloud"
+# Syncthing はアプリ版 (formula + brew services ではなく)。アプリが自己更新するので、
+# ~/Documents などへのアクセス許可が更新のたびに外れない (formula は Cellar のパスが変わって外れる)。
+# 「Start at login」はメニューバーの Syncthing → Preferences で設定する。
+cask "syncthing-app"
