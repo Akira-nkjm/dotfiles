@@ -38,6 +38,7 @@ zoxide  = "latest"   # 賢い cd (zshrc で eval `zoxide init zsh`)
 delta   = "latest"   # git diff pager (gitconfig で設定)
 lazygit = "latest"   # git TUI
 yq      = "latest"   # YAML/TOML の jq
+actionlint = "latest"   # GitHub Actions の workflow を push 前にチェック
 typst = "latest"
 
 # Infrastructure as Code / AWS（LocalStack 練習 + 本物の AWS でも使い回す）
