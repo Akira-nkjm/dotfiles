@@ -93,6 +93,15 @@ fi
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
 # -------------------------
+# gcloud が使う Python
+# -------------------------
+# gcloud は Python 3.10+ が必要。mac の /usr/bin/python3 は 3.9 なので、
+# bootstrap.sh が uv で入れる Python 3.13 を使わせる (mise の gcloud も同じ)。
+_uv_py=( "$HOME"/.local/share/uv/python/cpython-3.13-*/bin/python3.13(N) )
+(( ${#_uv_py} )) && export CLOUDSDK_PYTHON="${_uv_py[1]}"
+unset _uv_py
+
+# -------------------------
 # mise (optional)
 # -------------------------
 command -v mise >/dev/null 2>&1 && eval "$(mise activate zsh)"

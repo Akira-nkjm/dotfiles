@@ -83,6 +83,14 @@ if ! command -v uv >/dev/null 2>&1; then
   log "Installing uv"
   curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
+UV="$(command -v uv || echo "$HOME/.local/bin/uv")"
+
+# gcloud (mise) は Python 3.10+ が必要。mac の /usr/bin/python3 は 3.9 なので
+# uv で 3.13 を入れて CLOUDSDK_PYTHON で指す (zshrc でも同じ値を設定する)。
+log "Installing Python 3.13 via uv (for gcloud)"
+"$UV" python install 3.13
+CLOUDSDK_PYTHON="$("$UV" python find 3.13)"
+export CLOUDSDK_PYTHON
 
 # -------------------------
 # 4. AI coding assistants (Claude Code / OpenAI Codex CLI)
