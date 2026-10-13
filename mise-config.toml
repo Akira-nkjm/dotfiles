@@ -59,6 +59,11 @@ k3d = "latest"
 kubectl = "latest"
 helm = "latest"
 k9s = "latest"
+
+# Secrets の暗号化 (homelab repo の *.sops.yaml)。age 鍵の置き場所は
+# mac: ~/Library/Application Support/sops/age/keys.txt / Linux: ~/.config/sops/age/keys.txt
+age  = "latest"
+sops = "latest"
 "aqua:EmbarkStudios/cargo-deny" = "latest"
 ollama = "latest"
 
