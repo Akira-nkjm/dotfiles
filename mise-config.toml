@@ -70,3 +70,9 @@ ollama = "latest"
 
 # 注: AI CLI (claude / codex) は公式 install script が推奨かつ自己更新するため
 # mise ではなく bootstrap.sh で直接導入 (uv / rustup と同じ扱い)。
+
+[settings.self_update]
+auto = true
+
+[settings.tool_update]
+global_auto = true
