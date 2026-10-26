@@ -68,5 +68,8 @@ sops = "latest"
 "aqua:EmbarkStudios/cargo-deny" = "latest"
 ollama = "latest"
 
+[settings.self_update]
+auto = true
+
 # 注: AI CLI (claude / codex) は公式 install script が推奨かつ自己更新するため
 # mise ではなく bootstrap.sh で直接導入 (uv / rustup と同じ扱い)。
