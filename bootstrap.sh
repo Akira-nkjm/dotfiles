@@ -86,10 +86,10 @@ fi
 UV="$(command -v uv || echo "$HOME/.local/bin/uv")"
 
 # gcloud (mise) は Python 3.10+ が必要。mac の /usr/bin/python3 は 3.9 なので
-# uv で 3.13 を入れて CLOUDSDK_PYTHON で指す (zshrc でも同じ値を設定する)。
-log "Installing Python 3.13 via uv (for gcloud)"
-"$UV" python install 3.13
-CLOUDSDK_PYTHON="$("$UV" python find 3.13)"
+# uv で 3.14 を入れて CLOUDSDK_PYTHON で指す (zshrc でも同じ値を設定する)。
+log "Installing Python 3.14 via uv (for gcloud)"
+"$UV" python install 3.14
+CLOUDSDK_PYTHON="$("$UV" python find 3.14)"
 export CLOUDSDK_PYTHON
 
 # -------------------------
