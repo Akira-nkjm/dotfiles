@@ -40,6 +40,7 @@ lazygit = "latest"   # git TUI
 yq      = "latest"   # YAML/TOML の jq
 actionlint = "latest"   # GitHub Actions の workflow を push 前にチェック
 typst = "latest"
+biome = "latest"
 
 # Infrastructure as Code / AWS（LocalStack 練習 + 本物の AWS でも使い回す）
 terraform = "latest"
